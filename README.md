@@ -1,2 +1,1 @@
-# java-aws-sdk-change-http-client-example
-
+# aws-sdk-java2-change-http-client-test

@@ -1,18 +1,55 @@
 AWSTemplateFormatVersion: '2010-09-09'
 Transform: AWS::Serverless-2016-10-31
 Description: >
-  java-lambda-aws-sdk-example
+  aws-sdk-java-change-http-client-example
 
 Globals:
   Function:
-    Timeout: 20
+    Timeout: 60
+    MemorySize: 256
 
 Resources:
-  HelloWorldFunction:
+  ApacheClientFunction:
     Type: AWS::Serverless::Function
     Properties:
       PackageType: Image
+      Policies:
+        - S3ReadPolicy:
+            BucketName: hogefuga
     Metadata:
       DockerTag: java11-maven-v1
-      DockerContext: ./HelloWorldFunction
+      DockerContext: ./ApacheClientFunction
+      Dockerfile: Dockerfile
+  AwsCrtAsyncClientFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      PackageType: Image
+      Policies:
+        - S3ReadPolicy:
+            BucketName: hogefuga
+    Metadata:
+      DockerTag: java11-maven-v1
+      DockerContext: ./AwsCrtAsyncClientFunction
+      Dockerfile: Dockerfile
+  NettyNioAsyncClientFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      PackageType: Image
+      Policies:
+        - S3ReadPolicy:
+            BucketName: hogefuga
+    Metadata:
+      DockerTag: java11-maven-v1
+      DockerContext: ./NettyNioAsyncClientFunction
+      Dockerfile: Dockerfile
+  URLConnectionClientFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      PackageType: Image
+      Policies:
+        - S3ReadPolicy:
+            BucketName: hogefuga
+    Metadata:
+      DockerTag: java11-maven-v1
+      DockerContext: ./URLConnectionClientFunction
       Dockerfile: Dockerfile
